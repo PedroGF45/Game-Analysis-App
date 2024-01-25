@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_analysis_app/timer.dart';
 
 class GameScreen extends StatelessWidget {
 
@@ -8,9 +9,7 @@ class GameScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('New Screen'),
       ),
-      body: Center(
-        child: Text('This is the new screen!'),
-      ),
+      body: TimerScreen(),
     );
   } 
 }
