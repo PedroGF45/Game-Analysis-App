@@ -49,10 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      floatingActionButton: ElevatedButton(
-        onPressed: _startGame,
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(
+        child: FloatingActionButton.extended(
+              onPressed: _startGame,
+              label: const Text('Start Game'),
+              icon: const Icon(Icons.play_arrow),
+              backgroundColor: Colors.blue,
+            ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
     );
   }
 }
