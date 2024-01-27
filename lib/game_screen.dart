@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:game_analysis_app/timer.dart';
+import 'package:game_analysis_app/half_time.dart';
 
 class GameScreen extends StatefulWidget {
   @override
@@ -20,6 +23,24 @@ class _GameScreenState extends State<GameScreen> {
   int _offSides = 0;
   int _foulsCommitted = 0;
   int _foulsSuffered = 0;
+  bool _showStopButton = false;
+
+  late TimerScreen _timer;
+  @override
+  void initState() {
+    super.initState();
+    _timer = TimerScreen(onTimerReached45Minutes: _ShowStopButton);
+  }
+
+  void _HalfTime() {
+    setState(() {
+      // create new state page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HalfTimeScreen(_successfulPasses, _unsuccessfulPasses, _shotsOnTarget, _shotsOffTarget, _ballsLost, _ballsRecovered, _corners, _freeKicks, _offSides, _foulsCommitted, _foulsSuffered)),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +54,8 @@ class _GameScreenState extends State<GameScreen> {
               alignment: Alignment.center,
               width: 100,
               height: 50,
-              child: TimerScreen(),
+              child: _timer,
+              
             ),
 
             // first row
@@ -170,6 +192,14 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               ],
             ),
+            SizedBox(height:20),
+
+            // Stop first half
+            if (_showStopButton)
+              ElevatedButton(
+                onPressed: _HalfTime,
+                child: Text('Stop first half'),
+              ),
           ],
         ),
       ),
@@ -182,5 +212,11 @@ class _GameScreenState extends State<GameScreen> {
         icon: const Icon(Icons.arrow_back),
       ),
     );
-  } 
+  }
+
+  void _ShowStopButton() {
+    setState(() {
+      _showStopButton = true;
+    });
+  }
 }

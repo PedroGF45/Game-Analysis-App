@@ -3,16 +3,28 @@ import 'package:flutter/material.dart';
 
 
 class TimerScreen extends StatefulWidget {
+
+  final VoidCallback onTimerReached45Minutes;
+
+  TimerScreen({required this.onTimerReached45Minutes});
+
   @override
   State<TimerScreen> createState() => _TimerState();
+
+  // Public method to access timerMinutes
+  int get timerMinutes => _TimerState().timerMinutes;
 }
 
 class _TimerState extends State<TimerScreen> {
-  int _timerSeconds = 0;
-  int _timerMinutes = 0;
+  int _timerSeconds = 00;
+  int _timerMinutes = 00;
   String _formattedSeconds = '00';
   String _formattedMinutes = '00';
   late Timer _timer;
+  Color _color = Colors.blue;
+
+  // get timerMinutes
+  int get timerMinutes => _timerMinutes;
 
   @override
   void initState() {
@@ -34,6 +46,12 @@ class _TimerState extends State<TimerScreen> {
         // Format the number into a string
         _formattedSeconds = _formatNumber(_timerSeconds);
         _formattedMinutes = _formatNumber(_timerMinutes);
+
+        // If the timer reaches 45 minutes, its half time
+        if (_timerMinutes == 45) {
+          _color = Colors.red;
+          widget.onTimerReached45Minutes();
+        }
 
       });
     });
@@ -63,7 +81,7 @@ class _TimerState extends State<TimerScreen> {
           // Set the border radius here
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              color: Colors.blue,
+              color: _color,
             ),
           child:
             Text(
@@ -73,6 +91,15 @@ class _TimerState extends State<TimerScreen> {
         ),
       ),
     );
+  }
+
+   void _stopTimer() {
+    _timer.cancel(); // Cancel the timer to stop it
+  }
+
+  // Public method to access and stop the timer
+  void stopTimer() {
+    _stopTimer();
   }
 
   @override
