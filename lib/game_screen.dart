@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:game_analysis_app/timer.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
+  @override
+  _GameScreenState createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
 
   // values to store
   int _successfulPasses = 0;
   int _unsuccessfulPasses = 0;
-  int _shotInTarget = 0;
-  int _shotOffTarget = 0;
-  int _ballLost = 0;
-  int _ballRecovered = 0;
-  int _corner = 0;
-  int _freeKick = 0;
-  int _offSide = 0;
-  int _foulCommitted = 0;
-  int _foulSuffered = 0;
+  int _shotsOnTarget = 0;
+  int _shotsOffTarget = 0;
+  int _ballsLost = 0;
+  int _ballsRecovered = 0;
+  int _corners = 0;
+  int _freeKicks = 0;
+  int _offSides = 0;
+  int _foulsCommitted = 0;
+  int _foulsSuffered = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,25 +43,32 @@ class GameScreen extends StatelessWidget {
                 // Successful Passes button
                 ElevatedButton(
                   onPressed: () {
-                    _successfulPasses++;
+                      // Update the button text when pressed
+                      setState(() {
+                        _successfulPasses++;
+                      });
                   },
-                  child: const Text('Successful Passes: $_successfulPasses'),
+                  child: Text('Successful Passes: $_successfulPasses'),
                 ),
 
                 // Unsuccessful Passes button
                 ElevatedButton(
                   onPressed: () {
-                    _unsuccessfulPasses++;
+                    setState(() {
+                      _unsuccessfulPasses++;
+                    });
                   },
-                  child: const Text('Unsuccessful Passes'),
+                  child: Text('Unsuccessful Passes: $_unsuccessfulPasses'),
                 ),
 
                 // Ball Lost button
                 ElevatedButton(
                   onPressed: () {
-                    _ballLost++;
+                    setState(() {
+                      _ballsLost++;
+                    });
                   },
-                  child: const Text('Ball Lost'),
+                  child: Text('Ball Lost: $_ballsLost'),
                 ),
               ],
             ),
@@ -68,25 +80,31 @@ class GameScreen extends StatelessWidget {
                 // Shot on Target button
                 ElevatedButton(
                   onPressed: () {
-                    _shotInTarget++;
+                    setState(() {
+                      _shotsOnTarget++;
+                    });
                   },
-                  child: const Text('Shot on Target'),
+                  child: Text('Shot on Target: $_shotsOnTarget'),
                 ),
 
                 // Shot off Target button
                 ElevatedButton(
                   onPressed: () {
-                    _shotOffTarget++;
+                    setState(() {
+                      _shotsOffTarget++;
+                    });
                   },
-                  child: const Text('Shot off Target'),
+                  child: Text('Shot off Target: $_shotsOffTarget'),
                 ),
 
                 // Ball Recovered button
                 ElevatedButton(
                   onPressed: () {
-                    _ballRecovered++;
+                    setState(() {
+                      _ballsRecovered++;
+                    });
                   },
-                  child: const Text('Ball Recovered'),
+                  child: Text('Ball Recovered: $_ballsRecovered'),
                 ),
               ],
             ),
@@ -98,25 +116,31 @@ class GameScreen extends StatelessWidget {
                 // Corner button
                 ElevatedButton(
                   onPressed: () {
-                    _corner++;
+                    setState(() {
+                      _corners++;
+                    });
                   },
-                  child: const Text('Corner'),
+                  child: Text('Corner: $_corners'),
                 ),
 
                 // Free Kick button
                 ElevatedButton(
                   onPressed: () {
-                    _freeKick++;
+                    setState(() {
+                      _freeKicks++;
+                    });
                   },
-                  child: const Text('Free Kick'),
+                  child: Text('Free Kick: $_freeKicks'),
                 ),
 
                 // Offside button
                 ElevatedButton(
                   onPressed: () {
-                    _offSide++;
+                    setState(() {
+                      _offSides++;
+                    });
                   },
-                  child: const Text('Offside'),
+                  child: Text('Offside: $_offSides'),
                 ),
               ],
             ),
@@ -128,21 +152,24 @@ class GameScreen extends StatelessWidget {
                 // Foul Committed button
                 ElevatedButton(
                   onPressed: () {
-                    _foulCommitted++;
+                    setState(() {
+                      _foulsCommitted++;
+                    });
                   },
-                  child: const Text('Foul Committed'),
+                  child: Text('Foul Committed: $_foulsCommitted'),
                 ),
 
                 // Foul Suffered button
                 ElevatedButton(
                   onPressed: () {
-                    _foulSuffered++;
+                    setState(() {
+                      _foulsSuffered++;
+                    });
                   },
-                  child: const Text('Foul Suffered'),
+                  child: Text('Foul Suffered: $_foulsSuffered'),
                 ),
               ],
             ),
-            
           ],
         ),
       ),
